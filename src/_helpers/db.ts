@@ -1,4 +1,5 @@
 //src/_helpers/db.ts
+import { env } from './env';
 import config from '../../config.json';
 import mysql from 'mysql2/promise';
 import { Sequelize } from 'sequelize';
@@ -13,7 +14,12 @@ export async function initialize(): Promise<void> {
     const { host, port, user, password, database } = config.database;
 
 // Create database if it doesn't exist
-const connection = await mysql.createConnection({ host, port, user, password });
+const connection = await mysql.createConnection({
+    host: env.DB_HOST,
+    port: Number(env.DB_PORT),
+    user: env.DB_USER,
+    password: env.DB_PASSWORD,
+});
 await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 await connection.end();
 

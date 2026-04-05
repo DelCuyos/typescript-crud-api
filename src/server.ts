@@ -1,4 +1,5 @@
 //src/server.ts
+
 import express, { Application } from 'express';
 import cors from 'cors';
 import { errorHandler } from './_middleware/errorHandler';
@@ -7,7 +8,11 @@ import usersController from './users/users.controller';
 
 const app: Application = express();
 
+
+
+
 // Middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
